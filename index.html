@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An interactive flashcard quiz application." />
+    <title>Recall — Flashcard Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">STUDY SMARTER</p>
+          <h1>Recall<span>.</span></h1>
+          <p class="intro">A calm space for learning one idea at a time.</p>
+        </div>
+        <button class="add-button" id="newCardButton" type="button">+ New flashcard</button>
+      </header>
+
+      <section class="study-panel" aria-labelledby="study-title">
+        <div class="panel-topline">
+          <h2 id="study-title">Your study deck</h2>
+          <span id="cardCount" class="card-count"></span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+
+        <div id="emptyState" class="empty-state" hidden>
+          <p>Your deck is ready for its first idea.</p>
+          <button class="primary-button" id="emptyNewButton" type="button">Create a flashcard</button>
+        </div>
+
+        <article id="flashcard" class="flashcard" tabindex="0" role="button" aria-live="polite" aria-label="Flashcard. Click to show answer." aria-pressed="false">
+          <div id="flashcardInner" class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <p class="card-label">QUESTION</p>
+              <p id="questionText" class="card-text"></p>
+              <p class="flip-hint">Click the card to flip it</p>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <p class="card-label">ANSWER</p>
+              <p id="answerText" class="card-text answer-text"></p>
+              <p class="flip-hint">Click the card to see the question</p>
+            </div>
+          </div>
+        </article>
+        <button id="revealButton" class="reveal-button" type="button">Show answer <span>↓</span></button>
+
+        <div id="cardControls" class="controls">
+          <button id="previousButton" class="icon-button" type="button" aria-label="Previous flashcard">←</button>
+          <p id="positionText" class="position-text"></p>
+          <button id="nextButton" class="icon-button" type="button" aria-label="Next flashcard">→</button>
+        </div>
+
+        <div id="manageControls" class="manage-controls">
+          <button id="editButton" class="text-button" type="button">Edit card</button>
+          <button id="deleteButton" class="text-button danger" type="button">Delete card</button>
+        </div>
+      </section>
+
+      <footer><span>Tip:</span> Press ← or → to move through your deck.</footer>
+    </main>
+
+    <dialog id="cardDialog" aria-labelledby="dialogTitle">
+      <form id="cardForm" method="dialog">
+        <div class="dialog-header">
+          <h2 id="dialogTitle">New flashcard</h2>
+          <button id="closeDialog" class="close-button" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <label for="questionInput">Question</label>
+        <textarea id="questionInput" required maxlength="300" placeholder="What do you want to remember?"></textarea>
+        <label for="answerInput">Answer</label>
+        <textarea id="answerInput" required maxlength="500" placeholder="Write the answer here."></textarea>
+        <div class="form-actions">
+          <button id="cancelButton" class="secondary-button" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Save flashcard</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
